@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <link rel="shortcut icon" href="./assets/vynalogo.png" type="image/x-icon">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <title>Crystal Collection Game</title>
+        <style>
+            body {
+                margin: 0;
+                background: #000;
+            }
+
+            @media (max-width: 640px) {
+                nav {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    width: 90%;
+                    padding: 0.5rem;
+                }
+
+                nav>* {
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .fixed.bottom-4.right-4 {
+                    bottom: 1rem;
+                    right: 1rem;
+                }
+
+                .fixed.bottom-4.right-4 a {
+                    padding: 0.5rem;
+                }
+
+                .fixed.bottom-4.right-4 svg {
+                    width: 1.25rem;
+                    height: 1.25rem;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <nav
+            class="fixed top-4 left-1/2 -translate-x-1/2 flex flex-row gap-4 bg-black/30 backdrop-blur-md p-4 rounded-xl border border-emerald-500/20">
+            <a href="./index.html">
+                <div
+                    class="px-4 py-2 bg-black/50 backdrop-blur-sm rounded-lg border border-emerald-500/20 text-emerald-400 font-medium hover:bg-black/60 transition-colors">
+                    VYNA</div>
+            </a>
+
+            <div class="px-4 py-2 bg-black/50 backdrop-blur-sm rounded-lg border border-emerald-500/20 text-emerald-400 font-medium hover:bg-black/60 transition-colors"
+                id="score">Crystals: 0</div>
+            <div class="px-4 py-2 bg-black/50 backdrop-blur-sm rounded-lg border border-emerald-500/20 text-emerald-400 font-medium hover:bg-black/60 transition-colors"
+                id="highscore">High Score: 0</div>
+            <div class="px-4 py-2 bg-black/50 backdrop-blur-sm rounded-lg border border-emerald-500/20 text-emerald-400 font-medium hover:bg-black/60 transition-colors"
+                id="playtime">Time Played: 0s</div>
+        </nav>
+
+        <div class="fixed bottom-4 right-4 flex flex-col gap-2 z-50">
+            <a href="https://discord.gg/76p7yDqS6z" target="_blank"
+                class="p-2 bg-black/50 backdrop-blur-sm rounded-lg border border-emerald-500/20 text-emerald-400 hover:bg-black/60 transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/vyna.guard_official/" target="_blank"
+                class="p-2 bg-black/50 backdrop-blur-sm rounded-lg border border-emerald-500/20 text-emerald-400 hover:bg-black/60 transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+            </a>
+            <a href="https://x.com/thevynaguard" target="_blank"
+                class="p-2 bg-black/50 backdrop-blur-sm rounded-lg border border-emerald-500/20 text-emerald-400 hover:bg-black/60 transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                </svg>
+            </a>
+            <a href="https://www.youtube.com/@VYNA-Official" target="_blank"
+                class="p-2 bg-black/50 backdrop-blur-sm rounded-lg border border-emerald-500/20 text-emerald-400 hover:bg-black/60 transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+            </a>
+            <a href="https://github.com/VYNA-Official" target="_blank"
+                class="p-2 bg-black/50 backdrop-blur-sm rounded-lg border border-emerald-500/20 text-emerald-400 hover:bg-black/60 transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+            </a>
+        </div>
+
+        <script type="module">
+            import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
+
+            const bgMusic = new Audio('./assets/VYNA.mp3'); // Update path to your music file
+            bgMusic.loop = true;
+            bgMusic.volume = 0.2;
+            bgMusic.play();
+
+            let scene, camera, renderer, score = 0;
+            let highScore = localStorage.getItem('highScore') || 0;
+            let crystals = [];
+            let timePlayed = 0;
+            let gameActive = true;
+            let player;
+            let rocks = [];
+            let platforms = [];
+            let playerVelocityY = 0;
+            let isJumping = false;
+            const GRAVITY = -0.015;
+            const JUMP_FORCE = 1;
+
+            // Crystal rarity settings
+            const CRYSTAL_RARITIES = {
+                COMMON: {
+                    color: 0x34d399,
+                    points: 1,
+                    chance: 0.6,
+                    scale: 0.5,
+                    emissiveIntensity: 0.5
+                },
+                RARE: {
+                    color: 0x3b82f6,
+                    points: 2,
+                    chance: 0.25,
+                    scale: 0.7,
+                    emissiveIntensity: 0.7
+                },
+                EPIC: {
+                    color: 0x8b5cf6,
+                    points: 3,
+                    chance: 0.1,
+                    scale: 0.9,
+                    emissiveIntensity: 0.9
+                },
+                MYTHICAL: {
+                    color: 0xef4444,
+                    points: 5,
+                    chance: 0.05,
+                    scale: 1.1,
+                    emissiveIntensity: 1
+                }
+            };
+
+            // Update high score display initially
+            document.getElementById('highscore').textContent = `High Score: ${highScore}`;
+
+            // Setup scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a1a1a);
+            scene.fog = new THREE.FogExp2(0x1a1a1a, 0.008);
+
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            document.body.appendChild(renderer.domElement);
+
+            // Create player character
+            function createPlayer() {
+                const geometry = new THREE.SphereGeometry(1, 32, 32);
+                const material = new THREE.MeshPhongMaterial({
+                    color: 0x34d399,
+                    emissive: 0x34d399,
+                    emissiveIntensity: 0.2,
+                    shininess: 100
+                });
+                player = new THREE.Mesh(geometry, material);
+                player.position.set(0, 1, 0);
+                player.castShadow = true;
+                scene.add(player);
+
+                // Add glow effect to player
+                const glowGeometry = new THREE.SphereGeometry(1.2, 32, 32);
+                const glowMaterial = new THREE.MeshBasicMaterial({
+                    color: 0x34d399,
+                    transparent: true,
+                    opacity: 0.15
+                });
+                const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+                player.add(glow);
+            }
+
+            // Create platform
+            function createPlatform(x, y, z) {
+                const platformGeometry = new THREE.BoxGeometry(10, 1, 10);
+                const platformMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x34d399,
+                    metalness: 0.3,
+                    roughness: 0.4
+                });
+                const platform = new THREE.Mesh(platformGeometry, platformMaterial);
+                platform.position.set(x, y, z);
+                platform.castShadow = true;
+                platform.receiveShadow = true;
+                platforms.push(platform);
+                scene.add(platform);
+
+                // Add a mythical crystal on the platform
+                createLargeCrystal(x, y + 2, z);
+            }
+
+            // Create large crystal (Mythical rarity)
+            function createLargeCrystal(x, y, z) {
+                const geometry = new THREE.OctahedronGeometry(CRYSTAL_RARITIES.MYTHICAL.scale);
+                const material = new THREE.MeshPhysicalMaterial({
+                    color: CRYSTAL_RARITIES.MYTHICAL.color,
+                    metalness: 0.9,
+                    roughness: 0.1,
+                    opacity: 0.9,
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                    envMapIntensity: 1,
+                    clearcoat: 1,
+                    clearcoatRoughness: 0.1,
+                    emissive: CRYSTAL_RARITIES.MYTHICAL.color,
+                    emissiveIntensity: CRYSTAL_RARITIES.MYTHICAL.emissiveIntensity
+                });
+
+                const crystal = new THREE.Mesh(geometry, material);
+                crystal.position.set(x, y, z);
+                crystal.rotation.x = Math.random() * Math.PI;
+                crystal.rotation.y = Math.random() * Math.PI;
+                crystal.isLarge = true;
+                crystal.points = CRYSTAL_RARITIES.MYTHICAL.points;
+                crystal.rarity = 'MYTHICAL';
+                crystal.originalPosition = { x, y, z }; // Store original position for respawning
+
+                const glowGeometry = new THREE.SphereGeometry(1.5, 16, 16);
+                const glowMaterial = new THREE.MeshBasicMaterial({
+                    color: CRYSTAL_RARITIES.MYTHICAL.color,
+                    transparent: true,
+                    opacity: 0.15
+                });
+                const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+                crystal.add(glow);
+
+                crystal.collectible = true;
+                crystal.castShadow = true;
+                crystals.push(crystal);
+                scene.add(crystal);
+            }
+
+            // Function to respawn large crystal
+            function respawnLargeCrystal(originalPosition) {
+                setTimeout(() => {
+                    createLargeCrystal(originalPosition.x, originalPosition.y, originalPosition.z);
+                }, 5000); // 5 seconds delay
+            }
+
+            // Add scattered platforms
+            for (let i = 0; i < 20; i++) { // Increased number of platforms
+                createPlatform(
+                    Math.random() * 320 - 160, // Doubled range
+                    Math.random() * 20 + 5, // Increased height range
+                    Math.random() * 320 - 160 // Doubled range
+                );
+            }
+
+            // Create terrain
+            const terrainGeometry = new THREE.PlaneGeometry(400, 400, 200, 200); // Doubled size
+            const terrainMaterial = new THREE.MeshStandardMaterial({
+                color: 0x2d3436,
+                roughness: 0.8,
+                metalness: 0.2
+            });
+            const terrain = new THREE.Mesh(terrainGeometry, terrainMaterial);
+            terrain.rotation.x = -Math.PI / 2;
+            terrain.receiveShadow = true;
+            scene.add(terrain);
+
+            // Add environmental features
+            function createRock(x, z) {
+                const rockGeometry = new THREE.DodecahedronGeometry(Math.random() * 2 + 1);
+                const rockMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x7f8c8d,
+                    roughness: 0.9
+                });
+                const rock = new THREE.Mesh(rockGeometry, rockMaterial);
+                rock.position.set(x, 0, z);
+                rock.castShadow = true;
+                rock.receiveShadow = true;
+
+                rock.collisionRadius = rockGeometry.parameters.radius * 1.2;
+                rocks.push(rock);
+
+                scene.add(rock);
+            }
+
+            // Add scattered rocks
+            for (let i = 0; i < 100; i++) { // Doubled number of rocks
+                createRock(Math.random() * 360 - 180, Math.random() * 360 - 180); // Doubled range
+            }
+
+            // Enhanced lighting system
+            const ambientLight = new THREE.AmbientLight(0x34d399, 0.4);
+            scene.add(ambientLight);
+
+            const moonLight = new THREE.DirectionalLight(0xffffff, 1.0);
+            moonLight.position.set(100, 200, 100); // Increased light position
+            moonLight.castShadow = true;
+            moonLight.shadow.mapSize.width = 2048;
+            moonLight.shadow.mapSize.height = 2048;
+            moonLight.shadow.camera.near = 0.5;
+            moonLight.shadow.camera.far = 1000; // Increased far plane
+            scene.add(moonLight);
+
+            // Add atmospheric point lights
+            const atmosphericLights = [];
+            for (let i = 0; i < 10; i++) { // Doubled number of lights
+                const light = new THREE.PointLight(0x34d399, 0.6, 100); // Increased range
+                light.position.set(
+                    Math.random() * 200 - 100,
+                    20,
+                    Math.random() * 200 - 100
+                );
+                atmosphericLights.push(light);
+                scene.add(light);
+            }
+
+            // Enhanced crystal creation with rarity system
+            function createCrystal() {
+                const rand = Math.random();
+                let rarity;
+
+                if (rand < CRYSTAL_RARITIES.MYTHICAL.chance) {
+                    rarity = 'MYTHICAL';
+                } else if (rand < CRYSTAL_RARITIES.EPIC.chance + CRYSTAL_RARITIES.MYTHICAL.chance) {
+                    rarity = 'EPIC';
+                } else if (rand < CRYSTAL_RARITIES.RARE.chance + CRYSTAL_RARITIES.EPIC.chance + CRYSTAL_RARITIES.MYTHICAL.chance) {
+                    rarity = 'RARE';
+                } else {
+                    rarity = 'COMMON';
+                }
+
+                const raritySettings = CRYSTAL_RARITIES[rarity];
+
+                const geometry = new THREE.OctahedronGeometry(raritySettings.scale);
+                const material = new THREE.MeshPhysicalMaterial({
+                    color: raritySettings.color,
+                    metalness: 0.9,
+                    roughness: 0.1,
+                    opacity: 0.9,
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                    envMapIntensity: 1,
+                    clearcoat: 1,
+                    clearcoatRoughness: 0.1,
+                    emissive: raritySettings.color,
+                    emissiveIntensity: raritySettings.emissiveIntensity
+                });
+
+                const crystal = new THREE.Mesh(geometry, material);
+                crystal.position.x = Math.random() * 360 - 180; // Doubled range
+                crystal.position.y = 1;
+                crystal.position.z = Math.random() * 360 - 180; // Doubled range
+                crystal.rotation.x = Math.random() * Math.PI;
+                crystal.rotation.y = Math.random() * Math.PI;
+                crystal.isLarge = false;
+                crystal.points = raritySettings.points;
+                crystal.rarity = rarity;
+
+                const glowGeometry = new THREE.SphereGeometry(raritySettings.scale * 1.6, 16, 16);
+                const glowMaterial = new THREE.MeshBasicMaterial({
+                    color: raritySettings.color,
+                    transparent: true,
+                    opacity: 0.15
+                });
+                const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+                crystal.add(glow);
+
+                crystal.collectible = true;
+                crystal.castShadow = true;
+                crystals.push(crystal);
+                scene.add(crystal);
+            }
+
+            // Enhanced sparkle effect based on rarity
+            function createSparkle(position, isLarge, rarity) {
+                const raritySettings = CRYSTAL_RARITIES[rarity || 'COMMON'];
+                const particleCount = isLarge ? 50 : 25;
+                const geometry = new THREE.BufferGeometry();
+                const positions = [];
+                const velocities = [];
+                const colors = [];
+                const color = new THREE.Color(raritySettings.color);
+
+                for (let i = 0; i < particleCount; i++) {
+                    positions.push(position.x, position.y, position.z);
+                    velocities.push(
+                        (Math.random() - 0.5) * 0.3,
+                        Math.random() * 0.5,
+                        (Math.random() - 0.5) * 0.3
+                    );
+                    colors.push(color.r, color.g, color.b);
+                }
+
+                geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+                geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+                const material = new THREE.PointsMaterial({
+                    size: isLarge ? 0.25 : 0.15,
+                    transparent: true,
+                    vertexColors: true,
+                    blending: THREE.AdditiveBlending
+                });
+
+                const sparkle = new THREE.Points(geometry, material);
+                sparkle.velocities = velocities;
+                scene.add(sparkle);
+
+                setTimeout(() => scene.remove(sparkle), 1000);
+                return sparkle;
+            }
+
+            let sparkles = [];
+
+            // Player movement and physics
+            const playerSpeed = 0.5;
+            const playerVelocity = new THREE.Vector3();
+
+            function checkPlatformCollision() {
+                for (let platform of platforms) {
+                    if (Math.abs(player.position.x - platform.position.x) < 5 &&
+                        Math.abs(player.position.z - platform.position.z) < 5) {
+                        if (Math.abs(player.position.y - (platform.position.y + 1.5)) < 1.5) {
+                            return platform.position.y + 2;
+                        }
+                    }
+                }
+                return null;
+            }
+
+            function handlePlayerMovement() {
+                playerVelocity.set(0, 0, 0);
+
+                if (keys['w']) playerVelocity.z -= playerSpeed;
+                if (keys['s']) playerVelocity.z += playerSpeed;
+                if (keys['a']) playerVelocity.x -= playerSpeed;
+                if (keys['d']) playerVelocity.x += playerSpeed;
+
+                // Jump handling
+                if (keys[' '] && !isJumping) {
+                    playerVelocityY = JUMP_FORCE;
+                    isJumping = true;
+                }
+
+                // Apply gravity
+                playerVelocityY += GRAVITY;
+
+                // Update position
+                const newPosition = player.position.clone().add(playerVelocity);
+                newPosition.y += playerVelocityY;
+
+                // Platform collision check
+                const platformY = checkPlatformCollision();
+                if (platformY !== null) {
+                    newPosition.y = platformY;
+                    playerVelocityY = 0;
+                    isJumping = false;
+                } else if (newPosition.y <= 1) {
+                    newPosition.y = 1;
+                    playerVelocityY = 0;
+                    isJumping = false;
+                }
+
+                if (!checkRockCollision(newPosition)) {
+                    // Use GSAP for smooth movement
+                    gsap.to(player.position, {
+                        x: Math.max(-180, Math.min(180, newPosition.x)), // Doubled bounds
+                        y: newPosition.y,
+                        z: Math.max(-180, Math.min(180, newPosition.z)), // Doubled bounds
+                        duration: 0.1,
+                        ease: "power1.out"
+                    });
+
+                    // Smooth camera follow
+                    gsap.to(camera.position, {
+                        x: player.position.x,
+                        y: player.position.y + 15,
+                        z: player.position.z + 25,
+                        duration: 0.2,
+                        ease: "power1.out",
+                        onUpdate: () => camera.lookAt(player.position)
+                    });
+                }
+
+                crystals.forEach((crystal, index) => {
+                    if (player.position.distanceTo(crystal.position) < 2) {
+                        sparkles.push(createSparkle(crystal.position, crystal.isLarge, crystal.rarity));
+                        scene.remove(crystal);
+                        crystals.splice(index, 1);
+                        score += crystal.points;
+
+                        // Show rarity popup
+                        const popup = document.createElement('div');
+                        popup.textContent = `+${crystal.points} ${crystal.rarity}!`;
+                        popup.style.position = 'fixed';
+                        popup.style.left = '50%';
+                        popup.style.top = '40%';
+                        popup.style.transform = 'translate(-50%, -50%)';
+                        popup.style.color = `#${CRYSTAL_RARITIES[crystal.rarity].color.toString(16)}`;
+                        popup.style.fontSize = '24px';
+                        popup.style.fontWeight = 'bold';
+                        popup.style.textShadow = '0 0 10px rgba(0,0,0,0.5)';
+                        document.body.appendChild(popup);
+
+                        setTimeout(() => popup.remove(), 1000);
+
+                        document.getElementById('score').textContent = `Crystals: ${score}`;
+
+                        // Update high score if current score is higher
+                        if (score > highScore) {
+                            highScore = score;
+                            localStorage.setItem('highScore', highScore);
+                            document.getElementById('highscore').textContent = `High Score: ${highScore}`;
+                        }
+
+                        // If it's a large crystal, schedule respawn
+                        if (crystal.isLarge && crystal.originalPosition) {
+                            respawnLargeCrystal(crystal.originalPosition);
+                        }
+                    }
+                });
+            }
+
+            function checkRockCollision(newPosition) {
+                for (let rock of rocks) {
+                    const distance = Math.sqrt(
+                        Math.pow(newPosition.x - rock.position.x, 2) +
+                        Math.pow(newPosition.z - rock.position.z, 2)
+                    );
+
+                    if (distance < (rock.collisionRadius + 1)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // Keyboard controls
+            const keys = {};
+            window.addEventListener('keydown', (e) => keys[e.key] = true);
+            window.addEventListener('keyup', (e) => keys[e.key] = false);
+
+            function updatePlaytime() {
+                if (gameActive) {
+                    timePlayed++;
+                    document.getElementById('playtime').textContent = `Time Played: ${timePlayed}s`;
+                }
+            }
+
+            setInterval(updatePlaytime, 1000);
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                if (gameActive) {
+                    handlePlayerMovement();
+                }
+
+                crystals.forEach(crystal => {
+                    crystal.rotation.x += 0.01;
+                    crystal.rotation.y += 0.01;
+                    crystal.children[0].scale.setScalar(1 + Math.sin(Date.now() * 0.003) * 0.1);
+                });
+
+                atmosphericLights.forEach(light => {
+                    light.intensity = 0.6 + Math.sin(Date.now() * 0.002) * 0.2;
+                });
+
+                sparkles.forEach(sparkle => {
+                    const positions = sparkle.geometry.attributes.position.array;
+                    for (let i = 0; i < positions.length; i += 3) {
+                        positions[i] += sparkle.velocities[i];
+                        positions[i + 1] += sparkle.velocities[i + 1] -= 0.01;
+                        positions[i + 2] += sparkle.velocities[i + 2];
+                    }
+                    sparkle.geometry.attributes.position.needsUpdate = true;
+                });
+
+                if (gameActive && Math.random() < 0.02 && crystals.length < 50) { // Increased max crystals
+                    createCrystal();
+                }
+
+                renderer.render(scene, camera);
+            }
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            createPlayer();
+            animate();
+        </script>
+    </body>
+
+</html>

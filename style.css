@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  user-select: none;
+}
+
+.autoShow {
+  animation: autoShowAnimation both;
+  animation-timeline: view(70% 5%);
+}
+
+@keyframes autoShowAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(200px) scale(0.3);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.label {
+  font-family: "Helvetica Now Display";
+}
+
+h1 {
+  font-family: 'Michroma', sans-serif;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .text-20vw {
+    font-size: 15vw;
+  }
+
+  .w-85 {
+    width: 95%;
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .w-96 {
+    width: 100%;
+  }
+
+  .w-400px {
+    width: 300px;
+  }
+
+  .h-400px {
+    height: 300px;
+  }
+
+  .w-600px {
+    width: 100%;
+  }
+
+  .h-600px {
+    height: 400px;
+  }
+
+  .p-8 {
+    padding: 1rem;
+  }
+
+  .gap-6 {
+    gap: 1rem;
+  }
+
+  .gap-10 {
+    gap: 1.5rem;
+  }
+
+  .text-5xl {
+    font-size: 2.5rem;
+  }
+
+  .text-4xl {
+    font-size: 2rem;
+  }
+
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+
+  .mb-12 {
+    margin-bottom: 2rem;
+  }
+
+  .py-20 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-20vw {
+    font-size: 12vw;
+  }
+
+  .grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .w-400px {
+    width: 250px;
+  }
+
+  .h-400px {
+    height: 250px;
+  }
+
+  .text-5xl {
+    font-size: 2rem;
+  }
+
+  .text-4xl {
+    font-size: 1.75rem;
+  }
+
+  .text-2xl {
+    font-size: 1.25rem;
+  }
+
+  .p-6 {
+    padding: 0.75rem;
+  }
+
+  .gap-4 {
+    gap: 0.75rem;
+  }
+}
