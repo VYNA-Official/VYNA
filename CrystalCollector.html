@@ -32,7 +32,122 @@
     </head>
 
     <body class="bg-black text-white">
-        <div class="container mx-auto px-4 py-8 sm:py-16 relative z-10" id="nft_collections">
+
+        <nav
+            class="fixed top-4 left-4 right-4 z-50 bg-black/40 backdrop-blur-md border border-emerald-500/20 rounded-2xl">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <a href="./index.html" class="text-2xl font-bold text-emerald-300 text-glow">Vyna</a>
+                </div>
+            </div>
+        </nav>
+
+        <div id="gameStartMenu" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
+            <div class="bg-black/60 backdrop-blur-xl p-8 rounded-3xl border border-emerald-500/20 max-w-2xl w-full">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold text-emerald-200 mb-4">Crystal Collector</h2>
+                    <p class="text-emerald-300/80 mb-8">Collect crystals, earn points, and unlock unique NFTs in this
+                        immersive experience.</p>
+
+                    <div class="flex justify-center gap-6 mb-8">
+                        <a href="https://x.com/thevynaguard" target="_blank"
+                            class="bg-black/40 p-4 rounded-xl border border-emerald-500/10 hover:bg-black/60 transition-all">
+                            <svg class="w-8 h-8 text-emerald-300" fill="currentColor" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path
+                                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="https://discord.gg/76p7yDqS6z" target="_blank"
+                            class="bg-black/40 p-4 rounded-xl border border-emerald-500/10 hover:bg-black/60 transition-all">
+                            <svg class="w-8 h-8 text-emerald-300" fill="currentColor" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path
+                                    d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/VYNA-Official" target="_blank"
+                            class="bg-black/40 p-4 rounded-xl border border-emerald-500/10 hover:bg-black/60 transition-all">
+                            <svg class="w-8 h-8 text-emerald-300" fill="currentColor" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/vyna.guard_official/" target="_blank"
+                            class="bg-black/40 p-4 rounded-xl border border-emerald-500/10 hover:bg-black/60 transition-all">
+                            <svg class="w-8 h-8 text-emerald-300" fill="currentColor" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/@VYNA-Official" target="_blank"
+                            class="bg-black/40 p-4 rounded-xl border border-emerald-500/10 hover:bg-black/60 transition-all">
+                            <svg class="w-8 h-8 text-emerald-300" fill="currentColor" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="space-y-4">
+                        <button onclick="startGame()"
+                            class="w-full px-8 py-4 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 rounded-xl border border-emerald-500/30 text-xl font-bold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Start Game
+                        </button>
+                        <button onclick="document.getElementById('tutorialContent').classList.toggle('hidden')"
+                            class="w-full px-8 py-4 bg-blue-500/20 hover:bg-blue-500/30 text-blue-200 rounded-xl border border-blue-500/30 text-xl font-bold transition-all duration-300 hover:scale-105">
+                            How to Play
+                        </button>
+                    </div>
+
+                    <div id="tutorialContent"
+                        class="hidden mt-8 text-left bg-black/40 p-6 rounded-xl border border-blue-500/20">
+                        <h3 class="text-xl font-bold text-blue-200 mb-4">Game Controls & Mechanics</h3>
+                        <ul class="space-y-3 text-blue-300/80">
+                            <li class="flex items-center gap-2">
+                                <span class="bg-blue-500/20 px-2 py-1 rounded">WASD</span>
+                                <span>Use these keys to move your car in all directions</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="bg-emerald-500/20 px-2 py-1 rounded">Crystals</span>
+                                <span>Collect glowing crystals to earn points (+10 points each)</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="bg-red-500/20 px-2 py-1 rounded">Obstacles</span>
+                                <span>Avoid the buildings</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="bg-purple-500/20 px-2 py-1 rounded">Power-ups</span>
+                                <span>Collect purple orbs for temporary speed boosts</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="bg-yellow-500/20 px-2 py-1 rounded">V Tokens</span>
+                                <span>Convert 100 points into 1 V Token to purchase NFTs</span>
+                            </li>
+                        </ul>
+                        <p class="mt-4 text-blue-200 text-sm">Tip: The game gets progressively harder as your score
+                            increases. Plan your movements carefully!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-12 mx-auto px-4 py-8 sm:py-16 relative z-10" id="nft_collections">
             <!-- Game Canvas Container -->
             <div
                 class="w-full h-[600px] relative mb-8 rounded-3xl overflow-hidden border border-emerald-500/20 shadow-[0_0_50px_rgba(16,185,129,0.1)]">
@@ -146,6 +261,7 @@
                 </div>
             </div>
         </div>
+
         <div id="customizationModal" class="fixed inset-0 bg-black/90 z-50 hidden">
             <div class="container mx-auto px-4 h-full flex items-center justify-center">
                 <div class="bg-black/60 backdrop-blur-xl p-8 rounded-3xl border border-emerald-500/20 w-full max-w-3xl">
@@ -194,141 +310,180 @@
             </div>
         </div>
 
-        <!-- Game Start Menu -->
-        <div id="gameStartMenu" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
-            <div class="bg-black/60 backdrop-blur-xl p-8 rounded-3xl border border-emerald-500/20 max-w-2xl w-full">
-                <div class="text-center">
-                    <h2 class="text-4xl font-bold text-emerald-200 mb-4">Crystal Collector</h2>
-                    <p class="text-emerald-300/80 mb-8">Collect crystals, earn points, and unlock unique NFTs in this
-                        immersive experience.</p>
-
-                    <div class="flex justify-center gap-6 mb-8">
-                        <a href="https://twitter.com/vyna" target="_blank"
-                            class="bg-black/40 p-4 rounded-xl border border-emerald-500/10 hover:bg-black/60 transition-all">
-                            <svg class="w-8 h-8 text-emerald-300" fill="currentColor" viewBox="0 0 24 24"
-                                aria-hidden="true">
-                                <path
-                                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84">
-                                </path>
-                            </svg>
-                        </a>
-                        <a href="https://discord.gg/vyna" target="_blank"
-                            class="bg-black/40 p-4 rounded-xl border border-emerald-500/10 hover:bg-black/60 transition-all">
-                            <svg class="w-8 h-8 text-emerald-300" fill="currentColor" viewBox="0 0 24 24"
-                                aria-hidden="true">
-                                <path
-                                    d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z">
-                                </path>
-                            </svg>
-                        </a>
-                        <a href="https://github.com/vyna" target="_blank"
-                            class="bg-black/40 p-4 rounded-xl border border-emerald-500/10 hover:bg-black/60 transition-all">
-                            <svg class="w-8 h-8 text-emerald-300" fill="currentColor" viewBox="0 0 24 24"
-                                aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                        <a href="https://instagram.com/vyna" target="_blank"
-                            class="bg-black/40 p-4 rounded-xl border border-emerald-500/10 hover:bg-black/60 transition-all">
-                            <svg class="w-8 h-8 text-emerald-300" fill="currentColor" viewBox="0 0 24 24"
-                                aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                        <a href="https://youtube.com/vyna" target="_blank"
-                            class="bg-black/40 p-4 rounded-xl border border-emerald-500/10 hover:bg-black/60 transition-all">
-                            <svg class="w-8 h-8 text-emerald-300" fill="currentColor" viewBox="0 0 24 24"
-                                aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </a>
-                    </div>
-
-                    <div class="space-y-4">
-                        <button onclick="startGame()"
-                            class="w-full px-8 py-4 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 rounded-xl border border-emerald-500/30 text-xl font-bold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            Start Game
-                        </button>
-                        <button onclick="showTutorial()"
-                            class="w-full px-8 py-4 bg-blue-500/20 hover:bg-blue-500/30 text-blue-200 rounded-xl border border-blue-500/30 text-xl font-bold transition-all duration-300 hover:scale-105">
-                            How to Play
-                        </button>
-                    </div>
-
-                    <div id="tutorialContent"
-                        class="hidden mt-8 text-left bg-black/40 p-6 rounded-xl border border-blue-500/20">
-                        <h3 class="text-xl font-bold text-blue-200 mb-4">Game Controls & Mechanics</h3>
-                        <ul class="space-y-3 text-blue-300/80">
-                            <li class="flex items-center gap-2">
-                                <span class="bg-blue-500/20 px-2 py-1 rounded">WASD</span>
-                                <span>Use these keys to move your character in all directions</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="bg-emerald-500/20 px-2 py-1 rounded">Crystals</span>
-                                <span>Collect glowing crystals to earn points (+10 points each)</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="bg-red-500/20 px-2 py-1 rounded">Obstacles</span>
-                                <span>Avoid red obstacles - hitting them ends your game</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="bg-purple-500/20 px-2 py-1 rounded">Power-ups</span>
-                                <span>Collect purple orbs for temporary speed boosts</span>
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="bg-yellow-500/20 px-2 py-1 rounded">V Tokens</span>
-                                <span>Convert 100 points into 1 V Token to purchase NFTs</span>
-                            </li>
-                        </ul>
-                        <p class="mt-4 text-blue-200 text-sm">Tip: The game gets progressively harder as your score
-                            increases. Plan your movements carefully!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <script>
+            let audioContext;
+            let bgMusic;
+
+            document.addEventListener('click', initAudio, { once: true });
+
+            function initAudio() {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                bgMusic = new Audio('./assets/VYNA.mp3');
+                bgMusic.loop = true;
+                bgMusic.volume = 0.15;
+                bgMusic.play().catch(error => {
+                    console.log("Audio autoplay failed:", error);
+                });
+            }
+
+            // Environmental time tasks
+            let timeOfDay = 0; // 0 to 24 hours
+            let weatherConditions = ['clear', 'rain', 'fog'];
+            let currentWeather = 'clear';
+            let weatherDuration = 0;
+            let weatherIntensity = 0;
+
+            function updateEnvironment() {
+                // Update time of day
+                timeOfDay += 0.001; // Slowly advance time
+                if (timeOfDay >= 24) timeOfDay = 0;
+
+                // Update lighting based on time
+                const sunAngle = (timeOfDay - 12) * (Math.PI / 12);
+                sunLight.position.x = Math.cos(sunAngle) * 100;
+                sunLight.position.y = Math.sin(sunAngle) * 100;
+
+                // Night time adjustments
+                if (timeOfDay < 6 || timeOfDay > 18) {
+                    sunLight.intensity = 0.3;
+                    ambientLight.intensity = 0.1;
+                    scene.fog.density = 0.015;
+                } else {
+                    sunLight.intensity = 1.5;
+                    ambientLight.intensity = 0.3;
+                    scene.fog.density = 0.01;
+                }
+
+                // Weather system
+                weatherDuration -= 0.001;
+                if (weatherDuration <= 0) {
+                    // Change weather
+                    currentWeather = weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
+                    weatherDuration = Math.random() * 5 + 5; // 5-10 minutes
+                    weatherIntensity = Math.random();
+                }
+
+                // Apply weather effects
+                switch (currentWeather) {
+                    case 'rain':
+                        scene.fog.density = 0.012 + (weatherIntensity * 0.008);
+                        sunLight.intensity *= 0.7;
+                        break;
+                    case 'fog':
+                        scene.fog.density = 0.015 + (weatherIntensity * 0.015);
+                        break;
+                    default:
+                        // Clear weather - default values already set
+                        break;
+                }
+            }
+
             // Game setup
             const scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x000819); // Dark blue background
 
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            // Create sky with more realistic colors and gradients
+            const skyGeometry = new THREE.SphereGeometry(1000, 64, 64); // More segments for smoother sky
+            const skyMaterial = new THREE.ShaderMaterial({
+                uniforms: {
+                    topColor: { value: new THREE.Color(0x0077ff) },
+                    bottomColor: { value: new THREE.Color(0xffffff) },
+                    offset: { value: 33 },
+                    exponent: { value: 0.6 }
+                },
+                vertexShader: `
+                    varying vec3 vWorldPosition;
+                    void main() {
+                        vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+                        vWorldPosition = worldPosition.xyz;
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    uniform vec3 topColor;
+                    uniform vec3 bottomColor;
+                    uniform float offset;
+                    uniform float exponent;
+                    varying vec3 vWorldPosition;
+                    void main() {
+                        float h = normalize(vWorldPosition + offset).y;
+                        gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h, 0.0), exponent), 0.0)), 1.0);
+                    }
+                `,
+                side: THREE.BackSide,
+                fog: false
+            });
+            const sky = new THREE.Mesh(skyGeometry, skyMaterial);
+            scene.add(sky);
+
+            // Enhanced stars with different sizes and colors
+            const starGeometry = new THREE.BufferGeometry();
+            const starMaterials = [
+                new THREE.PointsMaterial({ color: 0xFFFFFF, size: 0.15 }),
+                new THREE.PointsMaterial({ color: 0xFFEEDD, size: 0.1 }),
+                new THREE.PointsMaterial({ color: 0xDDEEFF, size: 0.12 })
+            ];
+
+            const starGroups = [[], [], []];
+            for (let i = 0; i < 25000; i++) {
+                const x = (Math.random() - 0.5) * 2000;
+                const y = Math.random() * 1000;
+                const z = (Math.random() - 0.5) * 2000;
+                const groupIndex = Math.floor(Math.random() * 3);
+                starGroups[groupIndex].push(x, y, z);
+            }
+
+            const stars = new THREE.Group(); // Create a group to hold all star systems
+            starGroups.forEach((vertices, index) => {
+                const geometry = new THREE.BufferGeometry();
+                geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+                const starSystem = new THREE.Points(geometry, starMaterials[index]);
+                stars.add(starSystem);
+            });
+            scene.add(stars);
+
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
             const renderer = new THREE.WebGLRenderer({
                 canvas: document.getElementById('gameCanvas'),
                 antialias: true,
-                alpha: true
+                alpha: true,
+                physicallyCorrectLights: true
             });
-            renderer.setSize(document.getElementById('gameCanvas').clientWidth, document.getElementById('gameCanvas').clientHeight);
+            renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.shadowMap.enabled = true;
             renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.0;
 
-            // Create realistic terrain
-            const terrainSize = 80;
-            const terrainGeometry = new THREE.PlaneGeometry(terrainSize, terrainSize, 100, 100);
+            // Create more realistic terrain with heightmap and textures
+            const terrainSize = 160;
+            const terrainGeometry = new THREE.PlaneGeometry(terrainSize, terrainSize, 256, 256);
+
+            // Create detailed terrain material with multiple textures
+            const textureLoader = new THREE.TextureLoader();
+            const grassTexture = textureLoader.load('textures/grass.jpg');
+            const dirtTexture = textureLoader.load('textures/dirt.jpg');
+            const rockTexture = textureLoader.load('textures/rock.jpg');
+
+            grassTexture.wrapS = grassTexture.wrapT = THREE.RepeatWrapping;
+            dirtTexture.wrapS = dirtTexture.wrapT = THREE.RepeatWrapping;
+            rockTexture.wrapS = rockTexture.wrapT = THREE.RepeatWrapping;
+
+            grassTexture.repeat.set(50, 50);
+            dirtTexture.repeat.set(50, 50);
+            rockTexture.repeat.set(50, 50);
+
             const terrainMaterial = new THREE.MeshStandardMaterial({
-                color: 0x2d4c1e,
+                map: grassTexture,
+                normalMap: textureLoader.load('textures/grass_normal.jpg'),
+                roughnessMap: textureLoader.load('textures/grass_roughness.jpg'),
                 roughness: 0.8,
-                metalness: 0.2
+                metalness: 0.1
             });
 
             // Add height variation to terrain
             const vertices = terrainGeometry.attributes.position.array;
             for (let i = 0; i < vertices.length; i += 3) {
-                vertices[i + 1] = Math.random() * 0.5;
+                vertices[i + 1] = Math.random() * 1.0;
             }
             terrainGeometry.attributes.position.needsUpdate = true;
             terrainGeometry.computeVertexNormals();
@@ -339,7 +494,7 @@
             scene.add(terrain);
 
             // Create roads
-            const roadWidth = 4;
+            const roadWidth = 8;
             const roadMaterial = new THREE.MeshStandardMaterial({
                 color: 0x333333,
                 roughness: 0.8,
@@ -365,7 +520,7 @@
 
             // Create buildings
             const buildings = [];
-            const buildingCount = 20;
+            const buildingCount = 40;
             const buildingMaterial = new THREE.MeshStandardMaterial({
                 color: 0x444444,
                 roughness: 0.7,
@@ -373,102 +528,191 @@
             });
 
             for (let i = 0; i < buildingCount; i++) {
-                const height = 2 + Math.random() * 6;
-                const width = 2 + Math.random() * 3;
-                const depth = 2 + Math.random() * 3;
+                const height = 4 + Math.random() * 12;
+                const width = 4 + Math.random() * 6;
+                const depth = 4 + Math.random() * 6;
 
                 const building = new THREE.Mesh(
                     new THREE.BoxGeometry(width, height, depth),
                     buildingMaterial
                 );
 
-                // Position buildings along roads with some variation
-                const isHorizontal = Math.random() > 0.5;
-                if (isHorizontal) {
-                    building.position.x = Math.random() * (terrainSize - 10) - (terrainSize / 2 - 5);
-                    building.position.z = (roadWidth * 2) * (Math.random() > 0.5 ? 1 : -1);
-                } else {
-                    building.position.x = (roadWidth * 2) * (Math.random() > 0.5 ? 1 : -1);
-                    building.position.z = Math.random() * (terrainSize - 10) - (terrainSize / 2 - 5);
+                let x, z;
+                const safeDistance = roadWidth * 1.5;
+                const quadrant = Math.floor(Math.random() * 4);
+                const halfSize = terrainSize / 2;
+
+                switch (quadrant) {
+                    case 0:
+                        x = Math.random() * (halfSize - safeDistance - width) + safeDistance;
+                        z = Math.random() * (halfSize - safeDistance - depth) + safeDistance;
+                        break;
+                    case 1:
+                        x = Math.random() * (halfSize - safeDistance - width) - halfSize + safeDistance;
+                        z = Math.random() * (halfSize - safeDistance - depth) + safeDistance;
+                        break;
+                    case 2:
+                        x = Math.random() * (halfSize - safeDistance - width) + safeDistance;
+                        z = Math.random() * (halfSize - safeDistance - depth) - halfSize + safeDistance;
+                        break;
+                    case 3:
+                        x = Math.random() * (halfSize - safeDistance - width) - halfSize + safeDistance;
+                        z = Math.random() * (halfSize - safeDistance - depth) - halfSize + safeDistance;
+                        break;
                 }
 
-                building.position.y = height / 2;
+                building.position.set(x, height / 2, z);
                 building.castShadow = true;
                 building.receiveShadow = true;
                 scene.add(building);
                 buildings.push(building);
             }
 
-            // Add realistic fog
-            scene.fog = new THREE.FogExp2(0x000819, 0.02);
+            scene.fog = new THREE.FogExp2(0x000819, 0.01);
 
-            // Create car model
+            // Create enhanced car model with more details
             const carBody = new THREE.Group();
 
-            // Main body
-            const bodyGeometry = new THREE.BoxGeometry(1.2, 0.5, 2);
+            // Main body with sleeker design
+            const bodyGeometry = new THREE.BoxGeometry(1.4, 0.4, 2.2);
             const bodyMaterial = new THREE.MeshStandardMaterial({
                 color: 0x00ff88,
                 emissive: 0x00aa44,
                 emissiveIntensity: 0.5,
-                roughness: 0.3,
-                metalness: 0.7
+                roughness: 0.2,
+                metalness: 0.8,
+                envMapIntensity: 1.0
             });
             const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
             body.position.y = 0.3;
             body.castShadow = true;
             carBody.add(body);
 
-            // Roof
-            const roofGeometry = new THREE.BoxGeometry(1, 0.4, 1);
+            // Aerodynamic roof
+            const roofGeometry = new THREE.BoxGeometry(1.2, 0.35, 1.2);
             const roof = new THREE.Mesh(roofGeometry, bodyMaterial);
-            roof.position.y = 0.75;
+            roof.position.y = 0.7;
             roof.position.z = -0.2;
             roof.castShadow = true;
             carBody.add(roof);
 
-            // Wheels
-            const wheelGeometry = new THREE.CylinderGeometry(0.2, 0.2, 0.1, 16);
-            const wheelMaterial = new THREE.MeshStandardMaterial({ color: 0x333333 });
+            // Add windshield
+            const windshieldGeometry = new THREE.PlaneGeometry(1.1, 0.4);
+            const windshieldMaterial = new THREE.MeshPhysicalMaterial({
+                color: 0x88ffff,
+                transparent: true,
+                opacity: 0.3,
+                metalness: 0.9,
+                roughness: 0.1,
+                clearcoat: 1.0
+            });
+            const windshield = new THREE.Mesh(windshieldGeometry, windshieldMaterial);
+            windshield.position.set(0, 0.6, 0.3);
+            windshield.rotation.x = Math.PI * 0.2;
+            carBody.add(windshield);
+
+            // Enhanced wheels with better detail
+            const wheelGeometry = new THREE.CylinderGeometry(0.25, 0.25, 0.15, 24);
+            const wheelMaterial = new THREE.MeshStandardMaterial({
+                color: 0x222222,
+                roughness: 0.5,
+                metalness: 0.7
+            });
+            const tireMaterial = new THREE.MeshStandardMaterial({
+                color: 0x111111,
+                roughness: 0.8,
+                metalness: 0.2
+            });
 
             const wheels = [];
             const wheelPositions = [
-                { x: 0.6, z: 0.7 },
-                { x: -0.6, z: 0.7 },
-                { x: 0.6, z: -0.7 },
-                { x: -0.6, z: -0.7 }
+                { x: 0.7, z: 0.7 },
+                { x: -0.7, z: 0.7 },
+                { x: 0.7, z: -0.7 },
+                { x: -0.7, z: -0.7 }
             ];
 
             wheelPositions.forEach(pos => {
-                const wheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
-                wheel.rotation.z = Math.PI / 2;
-                wheel.position.set(pos.x, 0.2, pos.z);
-                wheel.castShadow = true;
-                wheels.push(wheel);
-                carBody.add(wheel);
+                const wheelRim = new THREE.Mesh(wheelGeometry, wheelMaterial);
+                const tire = new THREE.Mesh(
+                    new THREE.TorusGeometry(0.25, 0.08, 16, 32),
+                    tireMaterial
+                );
+
+                const wheelGroup = new THREE.Group();
+                wheelGroup.add(wheelRim);
+                wheelGroup.add(tire);
+
+                wheelGroup.rotation.z = Math.PI / 2;
+                wheelGroup.position.set(pos.x, 0.25, pos.z);
+                wheelGroup.castShadow = true;
+                wheels.push(wheelGroup);
+                carBody.add(wheelGroup);
+            });
+
+            // Add headlights
+            const headlightGeometry = new THREE.CircleGeometry(0.1, 16);
+            const headlightMaterial = new THREE.MeshPhysicalMaterial({
+                emissive: 0xffffee,
+                emissiveIntensity: 1,
+                transparent: true,
+                opacity: 0.9
+            });
+
+            const headlightPositions = [
+                { x: 0.4, y: 0.3, z: 1.1 },
+                { x: -0.4, y: 0.3, z: 1.1 }
+            ];
+
+            headlightPositions.forEach(pos => {
+                const headlight = new THREE.Mesh(headlightGeometry, headlightMaterial);
+                headlight.position.set(pos.x, pos.y, pos.z);
+                carBody.add(headlight);
+
+                const headlightGlow = new THREE.PointLight(0xffffee, 1, 10);
+                headlightGlow.position.set(pos.x, pos.y, pos.z + 0.1);
+                carBody.add(headlightGlow);
+            });
+
+            // Add taillights
+            const taillightGeometry = new THREE.CircleGeometry(0.08, 16);
+            const taillightMaterial = new THREE.MeshPhysicalMaterial({
+                emissive: 0xff0000,
+                emissiveIntensity: 1,
+                transparent: true,
+                opacity: 0.9
+            });
+
+            const taillightPositions = [
+                { x: 0.4, y: 0.3, z: -1.1 },
+                { x: -0.4, y: 0.3, z: -1.1 }
+            ];
+
+            taillightPositions.forEach(pos => {
+                const taillight = new THREE.Mesh(taillightGeometry, taillightMaterial);
+                taillight.position.set(pos.x, pos.y, pos.z);
+                carBody.add(taillight);
             });
 
             carBody.position.y = 0.5;
             scene.add(carBody);
             const player = carBody;
 
-            // Enhanced lighting system
             const ambientLight = new THREE.AmbientLight(0x112233, 0.3);
             scene.add(ambientLight);
 
             const sunLight = new THREE.DirectionalLight(0xffffeb, 1.5);
-            sunLight.position.set(50, 50, 0);
+            sunLight.position.set(100, 100, 0);
             sunLight.castShadow = true;
-            sunLight.shadow.mapSize.width = 2048;
-            sunLight.shadow.mapSize.height = 2048;
+            sunLight.shadow.mapSize.width = 4096;
+            sunLight.shadow.mapSize.height = 4096;
             sunLight.shadow.camera.near = 0.5;
-            sunLight.shadow.camera.far = 500;
+            sunLight.shadow.camera.far = 1000;
             scene.add(sunLight);
 
-            // Dynamic point lights
             const pointLights = [];
-            for (let i = 0; i < 5; i++) {
-                const light = new THREE.PointLight(0x00ffaa, 1, 10);
+            for (let i = 0; i < 10; i++) {
+                const light = new THREE.PointLight(0x00ffaa, 1, 20);
                 light.position.set(
                     Math.random() * terrainSize - terrainSize / 2,
                     2,
@@ -479,32 +723,45 @@
                 pointLights.push(light);
             }
 
-            // Camera setup with smooth follow
             camera.position.set(0, 15, 15);
             const cameraTarget = new THREE.Vector3();
             const cameraOffset = new THREE.Vector3(0, 15, 15);
 
-            // Game state
             let gameStarted = false;
             let points = 0;
             let vTokens = parseInt(localStorage.getItem('vTokens')) || 0;
             document.getElementById('tokenDisplay').textContent = vTokens;
 
-            // Enhanced vehicle physics
             const vehicle = {
                 velocity: new THREE.Vector3(),
-                acceleration: new THREE.Vector3(),
                 speed: 0,
-                maxSpeed: 0.1, // Reduced from 0.2
-                acceleration: 0.002, // Reduced from 0.004
-                deceleration: 0.002, // Reduced from 0.004
-                brakingForce: 0.01, // Reduced from 0.015
-                turnSpeed: 0.01, // Reduced from 0.02
-                driftFactor: 0.95,
+                maxSpeed: 0.3,
+                acceleration: 0.002,
+                deceleration: 0.001,
+                brakingForce: 0.015,
+                turnSpeed: 0.015,
+                driftFactor: 0.98,
+                grip: 0.85,
+                engineForce: 0,
+                brakingPower: 0,
+                steeringAngle: 0,
+                maxSteeringAngle: Math.PI / 4,
+                wheelBase: 1.4, // Distance between front and rear wheels
+                mass: 1000, // kg
+                dragCoefficient: 0.3,
+                rollingResistance: 0.015,
                 tilt: {
-                    max: 0.1,
+                    max: 0.15,
                     current: 0,
-                    speed: 0.1
+                    speed: 0.08,
+                    recovery: 0.92
+                },
+                suspension: {
+                    height: 0.5,
+                    damping: 0.15,
+                    stiffness: 0.25,
+                    travel: 0.2,
+                    compression: 0
                 }
             };
 
@@ -513,12 +770,14 @@
             const keys = { w: false, a: false, s: false, d: false, space: false };
 
             function startGame() {
-                gameStarted = true;
-                document.getElementById('gameStartMenu').style.display = 'none';
-                for (let i = 0; i < 20; i++) {
-                    createCrystal();
+                if (!gameStarted) {
+                    gameStarted = true;
+                    document.getElementById('gameStartMenu').style.display = 'none';
+                    for (let i = 0; i < 40; i++) {
+                        createCrystal();
+                    }
+                    animate();
                 }
-                animate();
             }
 
             function createCrystal() {
@@ -562,40 +821,103 @@
             });
 
             function updateVehiclePhysics() {
-                // Acceleration and braking
+                // Calculate engine force based on input
                 if (keys.w) {
-                    vehicle.speed = Math.min(vehicle.speed + vehicle.acceleration, vehicle.maxSpeed);
+                    vehicle.engineForce = vehicle.acceleration * vehicle.mass;
                 } else if (keys.s) {
-                    vehicle.speed = Math.max(vehicle.speed - vehicle.acceleration, -vehicle.maxSpeed * 0.5);
+                    vehicle.engineForce = -vehicle.acceleration * vehicle.mass * 0.5;
                 } else {
-                    vehicle.speed *= 0.98; // Natural deceleration
+                    vehicle.engineForce = 0;
                 }
 
-                // Braking
-                if (keys.space) {
-                    vehicle.speed *= (1 - vehicle.brakingForce);
-                }
+                // Calculate braking force
+                vehicle.brakingPower = keys.space ? vehicle.brakingForce * vehicle.mass : 0;
 
-                // Steering
+                // Calculate air resistance (drag)
+                const dragForce = -vehicle.dragCoefficient * vehicle.speed * Math.abs(vehicle.speed);
+
+                // Calculate rolling resistance
+                const rollingForce = -vehicle.rollingResistance * vehicle.speed;
+
+                // Calculate net force
+                const netForce = vehicle.engineForce + dragForce + rollingForce - vehicle.brakingPower;
+
+                // Update speed using F = ma
+                const acceleration = netForce / vehicle.mass;
+                vehicle.speed += acceleration;
+
+                // Apply speed limits
+                vehicle.speed = THREE.MathUtils.clamp(vehicle.speed, -vehicle.maxSpeed * 0.5, vehicle.maxSpeed);
+
+                // Enhanced steering with speed-dependent behavior
+                const speedFactor = Math.min(Math.abs(vehicle.speed) / vehicle.maxSpeed, 1);
+                const steeringResponse = THREE.MathUtils.lerp(1, 0.3, speedFactor);
+
                 if (keys.a) {
-                    playerRotation += vehicle.turnSpeed * (vehicle.speed / vehicle.maxSpeed);
-                    vehicle.tilt.current = -vehicle.tilt.max;
+                    vehicle.steeringAngle = THREE.MathUtils.lerp(
+                        vehicle.steeringAngle,
+                        vehicle.maxSteeringAngle,
+                        vehicle.turnSpeed * steeringResponse
+                    );
                 } else if (keys.d) {
-                    playerRotation -= vehicle.turnSpeed * (vehicle.speed / vehicle.maxSpeed);
-                    vehicle.tilt.current = vehicle.tilt.max;
+                    vehicle.steeringAngle = THREE.MathUtils.lerp(
+                        vehicle.steeringAngle,
+                        -vehicle.maxSteeringAngle,
+                        vehicle.turnSpeed * steeringResponse
+                    );
                 } else {
-                    vehicle.tilt.current *= 0.9;
+                    vehicle.steeringAngle *= 0.9; // Gradual steering return
                 }
 
-                // Apply vehicle tilt
-                player.rotation.z = vehicle.tilt.current;
-                player.rotation.y = playerRotation;
+                // Calculate turning radius based on steering angle and wheelbase
+                const turningRadius = vehicle.wheelBase / Math.sin(Math.abs(vehicle.steeringAngle));
 
-                // Calculate movement direction
+                // Update rotation based on speed and turning radius
+                if (Math.abs(vehicle.steeringAngle) > 0.01) {
+                    const angularVelocity = (vehicle.speed / turningRadius) * Math.sign(vehicle.steeringAngle);
+                    playerRotation += angularVelocity;
+                }
+
+                // Calculate lateral forces and drift
+                const lateralForce = vehicle.speed * vehicle.steeringAngle * vehicle.grip;
+                vehicle.tilt.current = -lateralForce * 0.5;
+
+                // Apply suspension physics
+                const suspensionForce = -vehicle.suspension.stiffness * vehicle.suspension.compression
+                    - vehicle.suspension.damping * vehicle.speed;
+                vehicle.suspension.compression = THREE.MathUtils.lerp(
+                    vehicle.suspension.compression,
+                    Math.sin(Date.now() * 0.01) * vehicle.suspension.travel * Math.abs(vehicle.speed / vehicle.maxSpeed),
+                    0.1
+                );
+
+                // Update vehicle position and rotation
                 const direction = new THREE.Vector3(0, 0, -1).applyAxisAngle(new THREE.Vector3(0, 1, 0), playerRotation);
                 vehicle.velocity.copy(direction.multiplyScalar(vehicle.speed));
 
-                // Collision detection with buildings
+                // Apply body roll and suspension
+                player.rotation.z = vehicle.tilt.current;
+                player.rotation.y = playerRotation;
+                player.position.y = vehicle.suspension.height + vehicle.suspension.compression;
+
+                // Enhanced wheel physics
+                const wheelRotationSpeed = vehicle.speed * 8;
+                wheels.forEach((wheelGroup, index) => {
+                    // Rotate wheels
+                    wheelGroup.children[0].rotation.x += wheelRotationSpeed;
+
+                    // Apply steering to front wheels
+                    if (index < 2) {
+                        wheelGroup.rotation.y = vehicle.steeringAngle;
+                    }
+
+                    // Suspension movement
+                    const wheelSuspension = vehicle.suspension.compression
+                        + Math.sin(Date.now() * 0.01 + index * Math.PI / 2) * 0.02 * Math.abs(vehicle.speed / vehicle.maxSpeed);
+                    wheelGroup.position.y = 0.25 + wheelSuspension;
+                });
+
+                // Collision detection and response
                 const nextPosition = player.position.clone().add(vehicle.velocity);
                 let collision = false;
 
@@ -607,7 +929,10 @@
 
                     if (boundingBox.intersectsBox(playerBox)) {
                         collision = true;
-                        vehicle.speed *= 0.5; // Reduce speed on collision
+                        // Realistic collision response
+                        vehicle.speed *= -0.3; // Bounce back
+                        vehicle.tilt.current = (Math.random() - 0.5) * 0.3; // Impact tilt
+                        vehicle.suspension.compression = Math.random() * 0.1; // Suspension compression
                     }
                 });
 
@@ -615,16 +940,10 @@
                     player.position.add(vehicle.velocity);
                 }
 
-                // Boundary limits
+                // Keep vehicle within boundaries
                 const boundaryLimit = terrainSize / 2 - 1;
                 player.position.x = THREE.MathUtils.clamp(player.position.x, -boundaryLimit, boundaryLimit);
                 player.position.z = THREE.MathUtils.clamp(player.position.z, -boundaryLimit, boundaryLimit);
-
-                // Wheel rotation based on speed
-                const wheelRotationSpeed = vehicle.speed * 3;
-                wheels.forEach(wheel => {
-                    wheel.rotation.x += wheelRotationSpeed;
-                });
             }
 
             function animate() {
@@ -632,9 +951,16 @@
                 requestAnimationFrame(animate);
 
                 updateVehiclePhysics();
+                updateEnvironment(); // Add environmental updates
 
-                // Camera follow with dynamic offset based on speed
-                const dynamicOffset = cameraOffset.clone().multiplyScalar(1 + Math.abs(vehicle.speed) * 0.5);
+                stars.rotation.y += 0.0001;
+
+                // Dynamic camera behavior based on speed and steering
+                const speedFactor = Math.abs(vehicle.speed / vehicle.maxSpeed);
+                const dynamicOffset = cameraOffset.clone()
+                    .multiplyScalar(1 + speedFactor * 0.5)
+                    .add(new THREE.Vector3(vehicle.steeringAngle * 5, 0, 0));
+
                 cameraTarget.copy(player.position);
                 camera.position.lerp(cameraTarget.clone().add(dynamicOffset), 0.1);
                 camera.lookAt(player.position);
@@ -671,16 +997,93 @@
                 }
             });
 
-            let resizeTimeout;
+            function purchaseNFT(nftId, cost) {
+                const purchasedNFTs = JSON.parse(localStorage.getItem('purchasedNFTs') || '[]');
+                if (purchasedNFTs.includes(nftId)) {
+                    alert('You already own this NFT!');
+                    return;
+                }
+
+                if (vTokens >= cost) {
+                    vTokens -= cost;
+                    document.getElementById('tokenDisplay').textContent = vTokens;
+                    localStorage.setItem('vTokens', vTokens.toString());
+
+                    purchasedNFTs.push(nftId);
+                    localStorage.setItem('purchasedNFTs', JSON.stringify(purchasedNFTs));
+
+                    const nftImg = document.getElementById(`nft${nftId}-img`);
+                    const modal = document.getElementById('customizationModal');
+                    modal.style.display = 'block';
+
+                    const canvas = document.getElementById('customizeCanvas');
+                    const ctx = canvas.getContext('2d');
+
+                    canvas.width = nftImg.naturalWidth;
+                    canvas.height = nftImg.naturalHeight;
+
+                    ctx.drawImage(nftImg, 0, 0);
+
+                    window.currentNFT = {
+                        id: nftId,
+                        image: nftImg
+                    };
+
+                    setupCustomizationSliders();
+                } else {
+                    alert('Not enough V Tokens! Play more to earn tokens.');
+                }
+            }
+
+            function setupCustomizationSliders() {
+                const sliders = {
+                    brightness: document.getElementById('brightnessSlider'),
+                    contrast: document.getElementById('contrastSlider'),
+                    saturation: document.getElementById('saturationSlider'),
+                    hue: document.getElementById('hueSlider')
+                };
+
+                for (let slider in sliders) {
+                    sliders[slider].addEventListener('input', updateCustomization);
+                }
+            }
+
+            function updateCustomization() {
+                const canvas = document.getElementById('customizeCanvas');
+                const ctx = canvas.getContext('2d');
+
+                const brightness = document.getElementById('brightnessSlider').value;
+                const contrast = document.getElementById('contrastSlider').value;
+                const saturation = document.getElementById('saturationSlider').value;
+                const hue = document.getElementById('hueSlider').value;
+
+                ctx.filter = 'none';
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%) hue-rotate(${hue}deg)`;
+                ctx.drawImage(window.currentNFT.image, 0, 0);
+            }
+
+            function downloadNFT() {
+                const canvas = document.getElementById('customizeCanvas');
+                const link = document.createElement('a');
+                link.download = `NFT_${window.currentNFT.id}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+            }
+
+            function closeCustomization() {
+                document.getElementById('customizationModal').style.display = 'none';
+            }
+
             window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(() => {
-                    const canvas = document.getElementById('gameCanvas');
-                    camera.aspect = canvas.clientWidth / canvas.clientHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-                }, 100);
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
             });
+
+            // Start button event listener
+            document.getElementById('startButton').addEventListener('click', startGame);
 
             renderer.render(scene, camera);
         </script>
