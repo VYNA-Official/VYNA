@@ -518,19 +518,32 @@
             verticalRoad.position.y = 0.01;
             scene.add(verticalRoad);
 
-            // Create buildings
+            // Create buildings with different colors
             const buildings = [];
             const buildingCount = 40;
-            const buildingMaterial = new THREE.MeshStandardMaterial({
-                color: 0x444444,
-                roughness: 0.7,
-                metalness: 0.3
-            });
+            const buildingColors = [
+                0x8B4513, // Saddle Brown
+                0xCD853F, // Peru
+                0xDEB887, // Burlywood
+                0xD2691E, // Chocolate
+                0xBC8F8F, // Rosy Brown
+                0xF4A460, // Sandy Brown
+                0xDAA520, // Goldenrod
+                0x800000, // Maroon
+                0xA0522D, // Sienna
+                0x6B4423  // Deep Brown
+            ];
 
             for (let i = 0; i < buildingCount; i++) {
                 const height = 4 + Math.random() * 12;
                 const width = 4 + Math.random() * 6;
                 const depth = 4 + Math.random() * 6;
+
+                const buildingMaterial = new THREE.MeshStandardMaterial({
+                    color: buildingColors[Math.floor(Math.random() * buildingColors.length)],
+                    roughness: 0.7,
+                    metalness: 0.3
+                });
 
                 const building = new THREE.Mesh(
                     new THREE.BoxGeometry(width, height, depth),
@@ -573,8 +586,24 @@
             // Create enhanced car model with more details
             const carBody = new THREE.Group();
 
-            // Main body with sleeker design
-            const bodyGeometry = new THREE.BoxGeometry(1.4, 0.4, 2.2);
+            // Main body shape - more curved and aerodynamic
+            const bodyShape = new THREE.Shape();
+            bodyShape.moveTo(-0.7, 0);
+            bodyShape.lineTo(0.7, 0);
+            bodyShape.lineTo(0.8, 0.2);
+            bodyShape.quadraticCurveTo(0.7, 0.4, 0.5, 0.4);
+            bodyShape.lineTo(-0.5, 0.4);
+            bodyShape.quadraticCurveTo(-0.7, 0.4, -0.8, 0.2);
+            bodyShape.lineTo(-0.7, 0);
+
+            const bodyGeometry = new THREE.ExtrudeGeometry(bodyShape, {
+                depth: 2.2,
+                bevelEnabled: true,
+                bevelThickness: 0.1,
+                bevelSize: 0.1,
+                bevelSegments: 3
+            });
+
             const bodyMaterial = new THREE.MeshStandardMaterial({
                 color: 0x00ff88,
                 emissive: 0x00aa44,
@@ -583,33 +612,88 @@
                 metalness: 0.8,
                 envMapIntensity: 1.0
             });
+
             const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
             body.position.y = 0.3;
+            body.position.z = -1.1;
             body.castShadow = true;
             carBody.add(body);
 
-            // Aerodynamic roof
-            const roofGeometry = new THREE.BoxGeometry(1.2, 0.35, 1.2);
+            // Hood with sleek curve
+            const hoodShape = new THREE.Shape();
+            hoodShape.moveTo(-0.6, 0);
+            hoodShape.lineTo(0.6, 0);
+            hoodShape.quadraticCurveTo(0.5, 0.2, 0, 0.25);
+            hoodShape.quadraticCurveTo(-0.5, 0.2, -0.6, 0);
+
+            const hoodGeometry = new THREE.ExtrudeGeometry(hoodShape, {
+                depth: 0.8,
+                bevelEnabled: true,
+                bevelThickness: 0.05,
+                bevelSize: 0.05,
+                bevelSegments: 2
+            });
+
+            const hood = new THREE.Mesh(hoodGeometry, bodyMaterial);
+            hood.position.y = 0.4;
+            hood.position.z = 0.8;
+            carBody.add(hood);
+
+            // Roof with curved top
+            const roofShape = new THREE.Shape();
+            roofShape.moveTo(-0.6, 0);
+            roofShape.lineTo(0.6, 0);
+            roofShape.quadraticCurveTo(0.6, 0.3, 0, 0.35);
+            roofShape.quadraticCurveTo(-0.6, 0.3, -0.6, 0);
+
+            const roofGeometry = new THREE.ExtrudeGeometry(roofShape, {
+                depth: 1.2,
+                bevelEnabled: true,
+                bevelThickness: 0.05,
+                bevelSize: 0.05,
+                bevelSegments: 2
+            });
+
             const roof = new THREE.Mesh(roofGeometry, bodyMaterial);
             roof.position.y = 0.7;
-            roof.position.z = -0.2;
-            roof.castShadow = true;
+            roof.position.z = -0.4;
             carBody.add(roof);
 
-            // Add windshield
-            const windshieldGeometry = new THREE.PlaneGeometry(1.1, 0.4);
-            const windshieldMaterial = new THREE.MeshPhysicalMaterial({
+            // Windows with realistic glass effect
+            const windowMaterial = new THREE.MeshPhysicalMaterial({
                 color: 0x88ffff,
                 transparent: true,
                 opacity: 0.3,
                 metalness: 0.9,
                 roughness: 0.1,
-                clearcoat: 1.0
+                clearcoat: 1.0,
+                clearcoatRoughness: 0.1
             });
-            const windshield = new THREE.Mesh(windshieldGeometry, windshieldMaterial);
-            windshield.position.set(0, 0.6, 0.3);
+
+            // Windshield
+            const windshieldGeometry = new THREE.PlaneGeometry(1.1, 0.5);
+            const windshield = new THREE.Mesh(windshieldGeometry, windowMaterial);
+            windshield.position.set(0, 0.65, 0.3);
             windshield.rotation.x = Math.PI * 0.2;
             carBody.add(windshield);
+
+            // Side windows
+            const sideWindowShape = new THREE.Shape();
+            sideWindowShape.moveTo(0, 0);
+            sideWindowShape.lineTo(0.8, 0);
+            sideWindowShape.quadraticCurveTo(0.7, 0.3, 0, 0.35);
+            sideWindowShape.lineTo(0, 0);
+
+            const sideWindowGeometry = new THREE.ShapeGeometry(sideWindowShape);
+            const leftWindow = new THREE.Mesh(sideWindowGeometry, windowMaterial);
+            leftWindow.position.set(0.7, 0.5, -0.2);
+            leftWindow.rotation.y = Math.PI * 0.5;
+            carBody.add(leftWindow);
+
+            const rightWindow = leftWindow.clone();
+            rightWindow.position.x = -0.7;
+            rightWindow.rotation.y = -Math.PI * 0.5;
+            carBody.add(rightWindow);
 
             // Enhanced wheels with better detail
             const wheelGeometry = new THREE.CylinderGeometry(0.25, 0.25, 0.15, 24);
@@ -650,13 +734,14 @@
                 carBody.add(wheelGroup);
             });
 
-            // Add headlights
+            // Add headlights with realistic glow
             const headlightGeometry = new THREE.CircleGeometry(0.1, 16);
             const headlightMaterial = new THREE.MeshPhysicalMaterial({
                 emissive: 0xffffee,
                 emissiveIntensity: 1,
                 transparent: true,
-                opacity: 0.9
+                opacity: 0.9,
+                clearcoat: 1.0
             });
 
             const headlightPositions = [
@@ -674,13 +759,14 @@
                 carBody.add(headlightGlow);
             });
 
-            // Add taillights
+            // Add taillights with brake light effect
             const taillightGeometry = new THREE.CircleGeometry(0.08, 16);
             const taillightMaterial = new THREE.MeshPhysicalMaterial({
                 emissive: 0xff0000,
                 emissiveIntensity: 1,
                 transparent: true,
-                opacity: 0.9
+                opacity: 0.9,
+                clearcoat: 1.0
             });
 
             const taillightPositions = [
@@ -693,6 +779,21 @@
                 taillight.position.set(pos.x, pos.y, pos.z);
                 carBody.add(taillight);
             });
+
+            // Add bumpers
+            const frontBumperGeometry = new THREE.BoxGeometry(1.4, 0.2, 0.2);
+            const bumperMaterial = new THREE.MeshStandardMaterial({
+                color: 0x333333,
+                roughness: 0.7,
+                metalness: 0.5
+            });
+            const frontBumper = new THREE.Mesh(frontBumperGeometry, bumperMaterial);
+            frontBumper.position.set(0, 0.2, 1.1);
+            carBody.add(frontBumper);
+
+            const rearBumper = frontBumper.clone();
+            rearBumper.position.z = -1.1;
+            carBody.add(rearBumper);
 
             carBody.position.y = 0.5;
             scene.add(carBody);
@@ -735,26 +836,26 @@
             const vehicle = {
                 velocity: new THREE.Vector3(),
                 speed: 0,
-                maxSpeed: 0.3,
-                acceleration: 0.002,
-                deceleration: 0.001,
-                brakingForce: 0.015,
-                turnSpeed: 0.015,
+                maxSpeed: 1.2, // Increased from 0.3 to 1.2
+                acceleration: 0.008, // Increased from 0.002 to 0.008
+                deceleration: 0.004, // Increased from 0.001 to 0.004
+                brakingForce: 0.03, // Increased from 0.015 to 0.03
+                turnSpeed: 0.015, // Decreased from 0.03 to 0.015 for smoother turning
                 driftFactor: 0.98,
                 grip: 0.85,
                 engineForce: 0,
                 brakingPower: 0,
                 steeringAngle: 0,
-                maxSteeringAngle: Math.PI / 4,
-                wheelBase: 1.4, // Distance between front and rear wheels
-                mass: 1000, // kg
+                maxSteeringAngle: Math.PI / 6, // Decreased from PI/4 to PI/6 for smoother turning
+                wheelBase: 1.4,
+                mass: 1000,
                 dragCoefficient: 0.3,
                 rollingResistance: 0.015,
                 tilt: {
                     max: 0.15,
                     current: 0,
-                    speed: 0.08,
-                    recovery: 0.92
+                    speed: 0.05, // Decreased from 0.08 to 0.05 for smoother tilt
+                    recovery: 0.95 // Increased from 0.92 to 0.95 for smoother recovery
                 },
                 suspension: {
                     height: 0.5,
@@ -762,7 +863,18 @@
                     stiffness: 0.25,
                     travel: 0.2,
                     compression: 0
-                }
+                },
+                inertia: 0.98,
+                weightTransfer: 0.2,
+                downforce: 0.001,
+                lateralFriction: 0.8, // Increased from 0.7 to 0.8 for better grip
+                engineBraking: 0.001,
+                transmissionEfficiency: 0.9,
+                gearRatios: [2.66, 1.78, 1.3, 1, 0.74],
+                currentGear: 1,
+                rpmRange: { min: 1000, max: 7000, current: 1000 },
+                wheelSlip: 0,
+                steeringDamping: 0.92 // New property for smoother steering return
             };
 
             let playerRotation = 0;
@@ -821,30 +933,59 @@
             });
 
             function updateVehiclePhysics() {
-                // Calculate engine force based on input
+                // Calculate RPM based on speed and gear
+                vehicle.rpmRange.current = THREE.MathUtils.lerp(
+                    vehicle.rpmRange.current,
+                    vehicle.rpmRange.min + (Math.abs(vehicle.speed) / vehicle.maxSpeed) *
+                    (vehicle.rpmRange.max - vehicle.rpmRange.min),
+                    0.1
+                );
+
+                // Automatic gear shifting
+                if (vehicle.rpmRange.current > vehicle.rpmRange.max * 0.9) {
+                    vehicle.currentGear = Math.min(vehicle.currentGear + 1, vehicle.gearRatios.length - 1);
+                } else if (vehicle.rpmRange.current < vehicle.rpmRange.min * 1.5 && vehicle.speed > 0.05) {
+                    vehicle.currentGear = Math.max(vehicle.currentGear - 1, 0);
+                }
+
+                // Calculate engine force with gear ratios
+                const gearEfficiency = vehicle.gearRatios[vehicle.currentGear] * vehicle.transmissionEfficiency;
                 if (keys.w) {
-                    vehicle.engineForce = vehicle.acceleration * vehicle.mass;
+                    vehicle.engineForce = vehicle.acceleration * vehicle.mass * gearEfficiency;
+                    // Add wheel spin effect at low speeds
+                    if (vehicle.speed < 0.05) {
+                        vehicle.wheelSlip = Math.min(vehicle.wheelSlip + 0.1, 1);
+                    }
                 } else if (keys.s) {
                     vehicle.engineForce = -vehicle.acceleration * vehicle.mass * 0.5;
                 } else {
                     vehicle.engineForce = 0;
+                    vehicle.wheelSlip *= 0.95; // Reduce wheel spin
                 }
 
-                // Calculate braking force
-                vehicle.brakingPower = keys.space ? vehicle.brakingForce * vehicle.mass : 0;
+                // Apply engine braking when not accelerating
+                if (!keys.w && !keys.s) {
+                    vehicle.engineForce -= Math.sign(vehicle.speed) * vehicle.engineBraking * vehicle.mass;
+                }
 
-                // Calculate air resistance (drag)
-                const dragForce = -vehicle.dragCoefficient * vehicle.speed * Math.abs(vehicle.speed);
+                // Calculate braking force with weight transfer
+                vehicle.brakingPower = keys.space ? vehicle.brakingForce * vehicle.mass * (1 + vehicle.weightTransfer * Math.abs(vehicle.speed)) : 0;
 
-                // Calculate rolling resistance
-                const rollingForce = -vehicle.rollingResistance * vehicle.speed;
+                // Calculate air resistance (drag) with speed-dependent downforce
+                const speedSquared = vehicle.speed * Math.abs(vehicle.speed);
+                const dragForce = -vehicle.dragCoefficient * speedSquared;
+                const downforce = vehicle.downforce * speedSquared;
+
+                // Calculate rolling resistance with weight and downforce
+                const totalWeight = vehicle.mass * (1 + downforce);
+                const rollingForce = -vehicle.rollingResistance * vehicle.speed * totalWeight;
 
                 // Calculate net force
                 const netForce = vehicle.engineForce + dragForce + rollingForce - vehicle.brakingPower;
 
-                // Update speed using F = ma
+                // Update speed with inertia
                 const acceleration = netForce / vehicle.mass;
-                vehicle.speed += acceleration;
+                vehicle.speed = vehicle.speed * vehicle.inertia + acceleration;
 
                 // Apply speed limits
                 vehicle.speed = THREE.MathUtils.clamp(vehicle.speed, -vehicle.maxSpeed * 0.5, vehicle.maxSpeed);
@@ -853,16 +994,17 @@
                 const speedFactor = Math.min(Math.abs(vehicle.speed) / vehicle.maxSpeed, 1);
                 const steeringResponse = THREE.MathUtils.lerp(1, 0.3, speedFactor);
 
+                // Apply steering with lateral friction
                 if (keys.a) {
                     vehicle.steeringAngle = THREE.MathUtils.lerp(
                         vehicle.steeringAngle,
-                        vehicle.maxSteeringAngle,
+                        vehicle.maxSteeringAngle * vehicle.lateralFriction,
                         vehicle.turnSpeed * steeringResponse
                     );
                 } else if (keys.d) {
                     vehicle.steeringAngle = THREE.MathUtils.lerp(
                         vehicle.steeringAngle,
-                        -vehicle.maxSteeringAngle,
+                        -vehicle.maxSteeringAngle * vehicle.lateralFriction,
                         vehicle.turnSpeed * steeringResponse
                     );
                 } else {
@@ -880,9 +1022,13 @@
 
                 // Calculate lateral forces and drift
                 const lateralForce = vehicle.speed * vehicle.steeringAngle * vehicle.grip;
-                vehicle.tilt.current = -lateralForce * 0.5;
+                vehicle.tilt.current = THREE.MathUtils.lerp(
+                    vehicle.tilt.current,
+                    -lateralForce * vehicle.tilt.max,
+                    vehicle.tilt.speed
+                );
 
-                // Apply suspension physics
+                // Apply suspension physics with speed-dependent compression
                 const suspensionForce = -vehicle.suspension.stiffness * vehicle.suspension.compression
                     - vehicle.suspension.damping * vehicle.speed;
                 vehicle.suspension.compression = THREE.MathUtils.lerp(
@@ -893,7 +1039,7 @@
 
                 // Update vehicle position and rotation
                 const direction = new THREE.Vector3(0, 0, -1).applyAxisAngle(new THREE.Vector3(0, 1, 0), playerRotation);
-                vehicle.velocity.copy(direction.multiplyScalar(vehicle.speed));
+                vehicle.velocity.copy(direction.multiplyScalar(vehicle.speed * (1 - vehicle.wheelSlip)));
 
                 // Apply body roll and suspension
                 player.rotation.z = vehicle.tilt.current;
@@ -901,9 +1047,9 @@
                 player.position.y = vehicle.suspension.height + vehicle.suspension.compression;
 
                 // Enhanced wheel physics
-                const wheelRotationSpeed = vehicle.speed * 8;
+                const wheelRotationSpeed = vehicle.speed * 8 * (1 + vehicle.wheelSlip);
                 wheels.forEach((wheelGroup, index) => {
-                    // Rotate wheels
+                    // Rotate wheels with wheel spin effect
                     wheelGroup.children[0].rotation.x += wheelRotationSpeed;
 
                     // Apply steering to front wheels
@@ -911,9 +1057,10 @@
                         wheelGroup.rotation.y = vehicle.steeringAngle;
                     }
 
-                    // Suspension movement
+                    // Individual wheel suspension
+                    const wheelPhase = Date.now() * 0.01 + index * Math.PI / 2;
                     const wheelSuspension = vehicle.suspension.compression
-                        + Math.sin(Date.now() * 0.01 + index * Math.PI / 2) * 0.02 * Math.abs(vehicle.speed / vehicle.maxSpeed);
+                        + Math.sin(wheelPhase) * 0.02 * Math.abs(vehicle.speed / vehicle.maxSpeed);
                     wheelGroup.position.y = 0.25 + wheelSuspension;
                 });
 
@@ -929,7 +1076,7 @@
 
                     if (boundingBox.intersectsBox(playerBox)) {
                         collision = true;
-                        // Realistic collision response
+                        // Enhanced collision response
                         vehicle.speed *= -0.3; // Bounce back
                         vehicle.tilt.current = (Math.random() - 0.5) * 0.3; // Impact tilt
                         vehicle.suspension.compression = Math.random() * 0.1; // Suspension compression
