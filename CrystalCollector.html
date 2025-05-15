@@ -906,9 +906,34 @@
                 });
 
                 const crystal = new THREE.Mesh(crystalGeometry, crystalMaterial);
-                crystal.position.x = Math.random() * (terrainSize - 4) - (terrainSize / 2 - 2);
-                crystal.position.z = Math.random() * (terrainSize - 4) - (terrainSize / 2 - 2);
-                crystal.position.y = 0.5;
+
+                // Keep trying to find a valid position until one is found
+                let validPosition = false;
+                while (!validPosition) {
+                    // Generate random position
+                    crystal.position.x = Math.random() * (terrainSize - 4) - (terrainSize / 2 - 2);
+                    crystal.position.z = Math.random() * (terrainSize - 4) - (terrainSize / 2 - 2);
+                    crystal.position.y = 0.5;
+
+                    // Check if position collides with any building
+                    validPosition = true;
+                    const crystalBox = new THREE.Box3().setFromObject(crystal);
+
+                    for (const building of buildings) {
+                        const buildingBox = new THREE.Box3().setFromObject(building);
+                        // Add a small buffer around buildings (2 units)
+                        buildingBox.min.x -= 2;
+                        buildingBox.min.z -= 2;
+                        buildingBox.max.x += 2;
+                        buildingBox.max.z += 2;
+
+                        if (buildingBox.intersectsBox(crystalBox)) {
+                            validPosition = false;
+                            break;
+                        }
+                    }
+                }
+
                 crystal.castShadow = true;
                 crystal.receiveShadow = true;
 
